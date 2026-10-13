@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LinkSentinel | Malicious URL Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <nav class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">◈</span><span>Link<span class="brand-light">Sentinel</span></span></a>
+    <div class="nav-right"><span class="live-dot"></span><span>URL INTELLIGENCE</span><span class="version">v1.0</span></div>
+  </nav>
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow"><span class="eyebrow-line"></span> THREAT ANALYSIS WORKSPACE</div>
+      <h1>Know where a link<br><span>really leads.</span></h1>
+      <p class="subtitle">Inspect suspicious URLs with layered heuristic analysis and optional Google Safe Browsing reputation checks.</p>
+    </section>
+
+    <section class="scanner panel">
+      <div class="panel-heading"><div><span class="step">01</span><span class="panel-title">Analyze a URL</span></div><span class="micro-label">INPUT / HTTP(S)</span></div>
+      <form id="scan-form">
+        <label for="url-input">Paste the complete link you want to verify</label>
+        <div class="input-wrap"><span class="input-icon">↗</span><input id="url-input" name="url" type="text" placeholder="https://example.com/path" autocomplete="off" spellcheck="false" required><button type="submit" id="scan-btn"><span class="btn-text">Scan URL</span><span class="btn-arrow">→</span></button></div>
+        <div class="input-foot"><span>◎ Links are analyzed by the local scanner; they are not opened in your browser.</span><span class="mono">SINGLE URL SCAN</span></div>
+      </form>
+      <div id="error-box" class="error-box hidden"></div>
+    </section>
+
+    <section id="results" class="results hidden">
+      <div class="result-top">
+        <div><div class="eyebrow"><span class="eyebrow-line"></span> SCAN REPORT</div><h2>Analysis results</h2></div>
+        <button id="copy-btn" class="ghost-btn" type="button">Copy report ↗</button>
+      </div>
+      <div class="result-grid">
+        <div class="panel verdict-panel">
+          <div class="panel-heading"><div><span class="step">02</span><span class="panel-title">Risk assessment</span></div><span class="micro-label" id="scan-scheme">HTTP(S)</span></div>
+          <div class="score-row"><div class="score-ring" id="score-ring"><div><strong id="score">0</strong><small>/100</small></div></div><div class="verdict-copy"><span class="micro-label">OVERALL VERDICT</span><h3 id="verdict">Analyzing</h3><p id="host"></p></div></div>
+          <div class="meter"><span id="meter-fill"></span></div><div class="meter-labels"><span>LOWER RISK</span><span>HIGH RISK</span></div>
+          <div class="reputation" id="reputation"></div>
+        </div>
+        <div class="panel details-panel">
+          <div class="panel-heading"><div><span class="step">03</span><span class="panel-title">Signals detected</span></div><span class="micro-label" id="signal-count">0 SIGNALS</span></div>
+          <div id="findings" class="findings"></div>
+        </div>
+      </div>
+      <div class="panel technical-panel">
+        <div class="panel-heading"><div><span class="step">04</span><span class="panel-title">Technical details</span></div><span class="micro-label">LOCAL ANALYSIS</span></div>
+        <div class="tech-grid"><div><span>Normalized URL</span><code id="normalized"></code></div><div><span>Hostname</span><code id="ascii-host"></code></div><div class="hash-cell"><span>SHA-256 fingerprint</span><code id="hash"></code></div></div>
+      </div>
+      <p class="disclaimer" id="disclaimer"></p>
+    </section>
+
+    <section class="features">
+      <div class="feature"><div class="feature-icon">⌁</div><h3>Pattern detection</h3><p>Checks URL structure, suspicious wording, encoded characters, host formatting and risky file extensions.</p></div>
+      <div class="feature"><div class="feature-icon">◉</div><h3>Threat reputation</h3><p>Optional Google Safe Browsing lookup adds a known-threat signal when an API key is configured.</p></div>
+      <div class="feature"><div class="feature-icon">⌘</div><h3>Readable evidence</h3><p>Each warning explains the signal, so you can review the evidence rather than trust a mystery score.</p></div>
+    </section>
+    <footer><span>LINKSENTINEL <span class="footer-dot">●</span> SECURITY LAB</span><span>Use as a triage aid, not a safety guarantee.</span></footer>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
